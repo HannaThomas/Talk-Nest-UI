@@ -1,5 +1,6 @@
 // src/components/AuthForm.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
 import axios from 'axios';
 
@@ -11,14 +12,16 @@ export default function AuthForm({ type, onSuccess }) {
         password: '',
         avatar: '',
     });
+    const fromSignUp = false;
 
+    const navigate = useNavigate();
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const endpoint = type === 'signup'
+        const endpoint = authType === 'signup'
             ? 'http://localhost:5000/api/signup'
             : 'http://localhost:5000/api/login';
 
@@ -26,6 +29,11 @@ export default function AuthForm({ type, onSuccess }) {
             const res = await axios.post(endpoint, form);
             onSuccess(res.data); // Pass user data to parent
             console.log('Auth successful:', res.data);
+            if (authType === 'signup') {
+                alert('Signup successful! Redirecting to login...');
+                navigate('/login', { state: { fromSignup: true } }); // ✅ Redirect here
+            }
+
         } catch (err) {
             alert(err.message || 'Something went wrong');
         }
