@@ -1,6 +1,7 @@
 // src/pages/Login.js
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ChatRoom from './ChatRoom';
 import AuthForm from '../components/AuthForm';
 
 export default function Login() {
@@ -8,18 +9,14 @@ export default function Login() {
     const location = useLocation();
     const [fromSignup, setFromSignup] = useState(location.state?.fromSignup || false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-
-    useEffect(() => {
-        if (user && fromSignup) {
-            setFromSignup(false); // Clear flag after login
-        }
-    }, [user, fromSignup]);
 
     const handleLogin = (data) => {
         if (data && data.username) {
             setUser(data);
             setError('');
+            if (fromSignup) setFromSignup(false);
         } else {
             setError('Wrong username or password');
         }
@@ -41,7 +38,10 @@ export default function Login() {
             ) : (
                 <>
                     {!fromSignup && (
-                        <h2>Welcome back, {user.username}!</h2>
+                        <>
+                            <h2>Welcome back, {user.username}!</h2>
+                            <ChatRoom user={user} />
+                        </>
                     )}
                 </>
             )}
