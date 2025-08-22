@@ -1,6 +1,6 @@
 // src/pages/Login.js
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import ChatRoom from './ChatRoom';
 import AuthForm from '../components/AuthForm';
 
@@ -9,7 +9,6 @@ export default function Login() {
     const location = useLocation();
     const [fromSignup, setFromSignup] = useState(location.state?.fromSignup || false);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
 
 
     const handleLogin = (data) => {
@@ -39,7 +38,6 @@ export default function Login() {
                 <>
                     {!fromSignup && (
                         <>
-                            <h2>Welcome back, {user.username}!</h2>
                             <ChatRoom user={user} />
                         </>
                     )}

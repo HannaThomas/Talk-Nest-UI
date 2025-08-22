@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    height: 100vh
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    background: #f4f4f4
+}
+
+.avatar {
+    height: 50%;
+    width: 100%;
+    border-Radius: 50%
+}
+
+.chatArea {
+    flex: 1;
+    display: flex;
+    flex-Direction: column
+}
+
+.messageFeed {
+    flex: 1;
+    padding: 20px;
+    overflow-Y: auto;
+    background: #fff
+}
+
+.message {
+    margin-Bottom: 10px
+}
+
+.inputArea {
+    display: flex;
+    padding: 10px;
+    border-Top: 1px solid #ccc
+}
+
+.input {
+    flex: 1;
+    padding: 10px
+}
+
+.button {
+    padding: 10px 20px
+}

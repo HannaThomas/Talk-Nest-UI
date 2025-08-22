@@ -12,7 +12,6 @@ export default function AuthForm({ type, onSuccess }) {
         password: '',
         avatar: '',
     });
-    const fromSignUp = false;
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -62,7 +61,6 @@ export default function AuthForm({ type, onSuccess }) {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                // backgroundColor: '#fff',
             }}>
                 <Box
                     component="form"
