@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './ChatRoom.css'
 import { io } from 'socket.io-client';
 
@@ -7,6 +7,14 @@ const socket = io('http://localhost:5000');
 export default function ChatRoom({ user }) {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        socket.on('receive_message', (msg) => {
+            setMessages((prev) => [...prev, msg]);
+        });
+
+        return () => socket.off('receive_message');
+    }, []);
 
     const sendMessage = () => {
         if (message.trim()) {
